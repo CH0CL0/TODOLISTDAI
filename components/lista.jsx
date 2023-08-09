@@ -28,13 +28,13 @@ const Lista = () => {
   };
 
   return (
-    <View>
+    <View style={styles.principal}>
+      <Text style={styles.title}>Todo List</Text>
       <Modal
         isVisible={isModalVisible}
         onBackdropPress={() => setIsModalVisible(false)}
       >
         <View style={styles.modalContainer}>
-          <Text style={styles.title}>Todo List</Text>
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.input}
@@ -63,13 +63,14 @@ const Lista = () => {
         onPress={() => setIsModalVisible(true)}
         style={styles.openModalButton}
       >
-        <Text style={styles.openModalButtonText}>Open Modal</Text>
+        <Text style={styles.openModalButtonText}>Nueva tarea +  </Text>
       </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+
   modalContainer: {
     backgroundColor: "#f7f7f7",
     padding: 20,
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   openModalButton: {
-    backgroundColor: "blue",
+    backgroundColor: "green",
     padding: 10,
     alignItems: "center",
     borderRadius: 5,
