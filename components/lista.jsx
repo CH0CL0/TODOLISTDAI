@@ -12,7 +12,6 @@ const Lista = () => {
   const [item, setItem] = useState("");
   const [lista, setLista] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const addTask = () => {
     if (item.trim() !== "") {
       setLista([...lista, item]);
@@ -26,7 +25,13 @@ const Lista = () => {
     updatedTasks.splice(index, 1);
     setLista(updatedTasks);
   };
-
+  const handleClick = event => {
+    if (event.target.style.textDecoration) {
+      event.target.style.removeProperty('text-decoration');
+    } else {
+      event.target.style.setProperty('text-decoration', 'line-through');
+    }
+  };
   return (
     <View style={styles.principal}>
       <Text style={styles.title}>Todo List</Text>
@@ -40,22 +45,22 @@ const Lista = () => {
               style={styles.input}
               value={item}
               onChangeText={setItem}
-              placeholder="Enter a task..."
+              placeholder="Ingresa una tarea..."
             />
             <TouchableOpacity onPress={addTask} style={styles.addButton}>
-              <Text style={styles.buttonText}>Add</Text>
+              <Text style={styles.buttonText}>Añadir</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
       {lista.map((task, index) => (
         <View style={styles.taskContainer} key={index}>
-          <Text style={styles.taskText}>{task}</Text>
+          <Text style={styles.taskText} onClick={handleClick}>{task}</Text>
           <TouchableOpacity
             onPress={() => removeTask(index)}
             style={styles.removeButton}
           >
-            <Text style={styles.removeButtonText}>Remove</Text>
+            <Text style={styles.removeButtonText}>Borrar</Text>
           </TouchableOpacity>
         </View>
       ))}
@@ -70,7 +75,6 @@ const Lista = () => {
 };
 
 const styles = StyleSheet.create({
-
   modalContainer: {
     backgroundColor: "#f7f7f7",
     padding: 20,
@@ -118,6 +122,7 @@ const styles = StyleSheet.create({
   taskText: {
     flex: 1,
     fontSize: 16,
+    padding:10,
   },
   removeButton: {
     backgroundColor: "red",
